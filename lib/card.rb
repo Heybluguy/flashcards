@@ -11,12 +11,11 @@ class Card
   def answer
     @answer
   end
-
-
 end
 
 class Guess
   attr_reader :card, :response
+  
   def initialize(response, card)
     @response = response
     @card = card
@@ -35,5 +34,16 @@ class Guess
       "Incorrect."
     end
   end
+end
 
+class Deck
+  attr_reader :cards
+
+  def initialize(cards)
+    @cards = cards
+  end
+
+  def count
+    @cards.length
+  end
 end
