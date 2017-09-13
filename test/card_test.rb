@@ -2,6 +2,10 @@ require 'pry'
 require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/card'
+require './lib/guess'
+require './lib/round'
+require './lib/deck'
+
 
 class CardsTest < Minitest::Test
   def test_card_one_has_a_question
@@ -35,64 +39,42 @@ class CardsTest < Minitest::Test
 
     assert_equal 3, deck.count
   end
-end
 
-class GuessTest < Minitest::Test
-  def test_users_guess
-    card = Card.new("What is the capital of Alaskan?", "Juneau")
-    guess = Guess.new("Juneau", card)
+  def test_starts_rounds
+    card_1 = Card.new("What is the capital of Alaska?", "Juneau")
+    card_2 = Card.new("Approximately how many miles are in one astronomical unit?", "93,000,000")
+    deck = Deck.new([card_1, card_2])
+    round = Round.new(deck)
 
-    assert_equal card, guess.card
+    assert_equal deck, round.deck
   end
 
-  def test_receives_response
-    card = Card.new("What is the capital of Alaskan?", "Juneau")
-    guess = Guess.new("Juneau", card)
+  def test_guesses_in_rounds
+    card_1 = Card.new("What is the capital of Alaska?", "Juneau")
+    card_2 = Card.new("Approximately how many miles are in one astronomical unit?", "93,000,000")
+    deck = Deck.new([card_1, card_2])
+    round = Round.new(deck)
 
-    assert_equal "Juneau", guess.response
+    assert_equal [], round.guesses
   end
 
-  def test_check_if_response_is_correct
-    card = Card.new("What is the capital of Alaskan?", "Juneau")
-    guess = Guess.new("Juneau", card)
+  def test_what_is_the_current_card
+      card_1 = Card.new("What is the capital of Alaska?", "Juneau")
+      card_2 = Card.new("Approximately how many miles are in one astronomical unit?", "93,000,000")
+      deck = Deck.new([card_1, card_2])
+      round = Round.new(deck)
 
-    assert guess.correct?
+      assert_instance_of Card, round.current_card
   end
 
-  def test_gives_feedback
-    card = Card.new("What is the capital of Alaskan?", "Juneau")
-    guess = Guess.new("Juneau", card)
-    guess.correct?
+  def test_record_guesses
+    card_1 = Card.new("What is the capital of Alaska?", "Juneau")
+    card_2 = Card.new("Approximately how many miles are in one astronomical unit?", "93,000,000")
+    deck = Deck.new([card_1, card_2])
+    round = Round.new(deck)
 
-    assert_equal "Correct!", guess.feedback
+    assert_equal "Juneau", round.record_guess("Juneau").response
   end
 
-  def test_guess_takes_card_argument
-    card = Card.new("Which planet is closest to the sun?", "Mercury")
-    guess = Guess.new("Saturn", card)
-
-    assert_equal card, guess.card
-  end
-
-  def test_receives_response_for_a_guess
-    card = Card.new("Which planet is closest to the sun?", "Mercury")
-    guess = Guess.new("Saturn", card)
-
-    assert_equal "Saturn", guess.response
-  end
-
-  def test_check_if_response_is_false
-    card = Card.new("Which planet is closest to the sun?", "Mercury")
-    guess = Guess.new("Saturn", card)
-
-    refute guess.correct?
-  end
-
-  def test_gives_feedback_for_false_response
-    card_1 = Card.new("Which planet is closest to the sun?", "Mercury")
-    guess = Guess.new("Saturn", card_1)
-    guess.correct?
-
-    assert_equal "Incorrect.", guess.feedback
-  end
+  
 end
