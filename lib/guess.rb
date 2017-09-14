@@ -1,3 +1,4 @@
+require "./test/test_helper"
 require_relative "card"
 
 class Guess
@@ -21,6 +22,7 @@ class Guess
     end
   end
 
+  
 
 
 end
