@@ -24,12 +24,13 @@ class Round
   def record_guess(response)
     @guesses << Guess.new(response,current_card)
     @index += 1
-    
     @guesses.last
-
   end
 
   def number_correct
-
+    guess_feedback = @guesses.map do |guess|
+      guess.feedback
+    end
+    (guess_feedback.select { |feedback| feedback == "Correct!"}).count
   end
 end

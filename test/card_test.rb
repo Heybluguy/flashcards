@@ -7,7 +7,7 @@ require './lib/round'
 require './lib/deck'
 
 
-class CardsTest < Minitest::Test
+class CardsTest < MiniTest::Test
   def test_card_one_has_a_question
     card = Card.new("What is the capital of Alaskan?", "Juneau")
       expected = "What is the capital of Alaskan?"
@@ -40,41 +40,6 @@ class CardsTest < Minitest::Test
     assert_equal 3, deck.count
   end
 
-  def test_starts_rounds
-    card_1 = Card.new("What is the capital of Alaska?", "Juneau")
-    card_2 = Card.new("Approximately how many miles are in one astronomical unit?", "93,000,000")
-    deck = Deck.new([card_1, card_2])
-    round = Round.new(deck)
 
-    assert_equal deck, round.deck
-  end
 
-  def test_guesses_in_rounds
-    card_1 = Card.new("What is the capital of Alaska?", "Juneau")
-    card_2 = Card.new("Approximately how many miles are in one astronomical unit?", "93,000,000")
-    deck = Deck.new([card_1, card_2])
-    round = Round.new(deck)
-
-    assert_equal [], round.guesses
-  end
-
-  def test_what_is_the_current_card
-      card_1 = Card.new("What is the capital of Alaska?", "Juneau")
-      card_2 = Card.new("Approximately how many miles are in one astronomical unit?", "93,000,000")
-      deck = Deck.new([card_1, card_2])
-      round = Round.new(deck)
-
-      assert_instance_of Card, round.current_card
-  end
-
-  def test_record_guesses
-    card_1 = Card.new("What is the capital of Alaska?", "Juneau")
-    card_2 = Card.new("Approximately how many miles are in one astronomical unit?", "93,000,000")
-    deck = Deck.new([card_1, card_2])
-    round = Round.new(deck)
-
-    assert_equal "Juneau", round.record_guess("Juneau").response
-  end
-
-  
 end

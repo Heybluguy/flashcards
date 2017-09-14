@@ -6,7 +6,7 @@ require './lib/guess'
 require './lib/round'
 require './lib/deck'
 
-class GuessTest < Minitest::Test
+class GuessTest < MiniTest::Test
   def test_users_guess
     card = Card.new("What is the capital of Alaskan?", "Juneau")
     guess = Guess.new("Juneau", card)
@@ -65,42 +65,6 @@ class GuessTest < Minitest::Test
     assert_equal "Incorrect.", guess.feedback
   end
 
-  def test_how_many_guesses
-    card_1 = Card.new("What is the capital of Alaska?", "Juneau")
-    card_2 = Card.new("Approximately how many miles are in one astronomical unit?", "93,000,000")
-    deck = Deck.new([card_1, card_2])
-    round = Round.new(deck)
-    round.record_guess("response")
 
-    assert_equal 1, round.guesses.count
-  end
 
-  def test_guesses_first_give_correct_feedback
-    card_1 = Card.new("What is the capital of Alaska?", "Juneau")
-    card_2 = Card.new("Approximately how many miles are in one astronomical unit?", "93,000,000")
-    deck = Deck.new([card_1, card_2])
-    round = Round.new(deck)
-    round.record_guess("Juneau")
-
-    assert_equal "Correct!", round.guesses.first.feedback
-  end
-
-  def test_guesses_first_give_incorrect_feedback
-    card_1 = Card.new("What is the capital of Alaska?", "Juneau")
-    card_2 = Card.new("Approximately how many miles are in one astronomical unit?", "93,000,000")
-    deck = Deck.new([card_1, card_2])
-    round = Round.new(deck)
-    round.record_guess("James")
-
-    assert_equal "Incorrect.", round.guesses.first.feedback
-  end
-
-  def test_correct_guesses_in_round
-    card_1 = Card.new("What is the capital of Alaska?", "Juneau")
-    card_2 = Card.new("Approximately how many miles are in one astronomical unit?", "93,000,000")
-    deck = Deck.new([card_1, card_2])
-    round = Round.new(deck)
-
-    assert_equal 1, round.number_correct
-  end
 end
