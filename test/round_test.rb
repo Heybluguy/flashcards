@@ -11,7 +11,7 @@ class RoundTest < MiniTest::Test
     assert_equal 1, round.guesses.count
   end
 
-  def test_guesses_first_give_correct_feedback
+  def test_first_correct_guess_gives_feedback
     card_1 = Card.new("What is the capital of Alaska?", "Juneau")
     card_2 = Card.new("Approximately how many miles are in one astronomical unit?", "93,000,000")
     deck = Deck.new([card_1, card_2])
@@ -21,12 +21,12 @@ class RoundTest < MiniTest::Test
     assert_equal "Correct!", round.guesses.first.feedback
   end
 
-  def test_guesses_first_give_incorrect_feedback
+  def test_first_incorrect_guess_gives_feedback
     card_1 = Card.new("What is the capital of Alaska?", "Juneau")
     card_2 = Card.new("Approximately how many miles are in one astronomical unit?", "93,000,000")
     deck = Deck.new([card_1, card_2])
     round = Round.new(deck)
-    round.record_guess("James")
+    round.record_guess("Denver")
 
     assert_equal "Incorrect.", round.guesses.first.feedback
   end
@@ -89,9 +89,18 @@ class RoundTest < MiniTest::Test
     round.record_guess("test answer")
     round.record_guess("test answer")
 
-    1000.times do #hehe
-      assert_equal 2, round.guesses.count
-    end
+    assert_equal 2, round.guesses.count
   end
 
+  def test_last_incorrect_guess_gives_feedback
+    card_1 = Card.new("What is the capital of Alaska?", "Juneau")
+    card_2 = Card.new("Approximately how many miles are in one astronomical unit?", "93,000,000")
+    deck = Deck.new([card_1, card_2])
+    round = Round.new(deck)
+    round.record_guess("80202")
+
+    assert_equal "Incorrect.", round.guesses.first.feedback
+  end
+
+  
 end
