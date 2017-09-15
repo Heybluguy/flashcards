@@ -1,10 +1,4 @@
-require 'pry'
-require 'minitest/autorun'
-require 'minitest/pride'
-require './lib/card'
-require './lib/guess'
-require './lib/round'
-require './lib/deck'
+require_relative 'test_helper'
 
 class GuessTest < MiniTest::Test
   def test_users_guess

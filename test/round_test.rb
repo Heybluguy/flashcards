@@ -97,10 +97,28 @@ class RoundTest < MiniTest::Test
     card_2 = Card.new("Approximately how many miles are in one astronomical unit?", "93,000,000")
     deck = Deck.new([card_1, card_2])
     round = Round.new(deck)
+    round.record_guess("32818")
     round.record_guess("80202")
 
-    assert_equal "Incorrect.", round.guesses.first.feedback
+    assert_equal "Incorrect.", round.guesses.last.feedback
   end
 
-  
+  def test_correct_guesses_in_round
+    card_1 = Card.new("What is the capital of Alaska?", "Juneau")
+    card_2 = Card.new("Approximately how many miles are in one astronomical unit?", "93,000,000")
+    deck = Deck.new([card_1, card_2])
+    round = Round.new(deck)
+    round.record_guess("Juneau")
+    round.record_guess("93,000")
+
+    assert_equal 1, round.number_correct
+  end
+
+  def test_correct_number_of_guesses_in_the_round
+    
+
+
+
+  end
+
 end

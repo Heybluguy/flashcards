@@ -1,21 +1,12 @@
-require "./test/test_helper"
 require_relative "guess"
-require_relative "deck"
 
 class Round
+  attr_reader :guesses, :deck
   def initialize(deck)
     @deck = deck
     @guesses = []
     @index = 0
     @correct = 0
-  end
-
-  def deck
-    @deck
-  end
-
-  def guesses
-  @guesses
   end
 
   def current_card
