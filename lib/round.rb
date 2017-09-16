@@ -25,4 +25,10 @@ class Round
     end
     (guess_feedback.select { |feedback| feedback == "Correct!"}).count
   end
+
+  def percent_correct
+    (number_correct.to_f / @guesses.count.to_f * 100.0)
+    .to_i
+  end
+
 end
