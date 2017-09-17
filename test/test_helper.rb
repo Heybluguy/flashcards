@@ -4,4 +4,3 @@ require "./lib/card"
 require "./lib/round"
 require 'minitest/autorun'
 require 'minitest/pride'
-require 'pry'

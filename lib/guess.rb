@@ -6,15 +6,19 @@ class Guess
   def initialize(response, card)
     @response = response
     @card = card
-    @correct = @response == @card.answer
+    @validation = correct?
   end
 
   def correct?
-    @correct
+    if @response == @card.answer
+      @validation = true
+    else
+      @validation = false
+    end
   end
 
   def feedback
-    if @correct == true
+    if @validation == true
       "Correct!"
     else
       "Incorrect."
