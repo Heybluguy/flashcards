@@ -2,7 +2,6 @@ require_relative "guess"
 require_relative "deck"
 require_relative "card"
 require_relative "round"
-require "pry"
 
 class FlashcardRunner
   attr_reader :card_1, :card_2, :card_3, :card_4, :deck, :round, :user_input, :current_card
@@ -45,7 +44,6 @@ class FlashcardRunner
       get_input
       round.record_guess(user_input)
       puts "#{round.guesses.last.feedback}".center(54)
-      # round.index += 1
       num += 1
     end
     puts "****** Game over! ******".center(54)

@@ -1,4 +1,3 @@
-require 'pry'
 require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/card'
@@ -6,20 +5,19 @@ require './lib/guess'
 require './lib/round'
 require './lib/deck'
 
-
 class CardsTest < MiniTest::Test
   def test_card_one_has_a_question
     card = Card.new("What is the capital of Alaskan?", "Juneau")
-      expected = "What is the capital of Alaskan?"
+    expected = "What is the capital of Alaskan?"
 
-      assert_equal expected, card.question
+    assert_equal expected, card.question
   end
 
   def test_card_one_has_an_answer
     card = Card.new("What is the capital of Alaskan?", "Juneau")
-      expected = "Juneau"
+    expected = "Juneau"
 
-      assert_equal expected, card.answer
+    assert_equal expected, card.answer
   end
 
   def test_cards_stored_inside_deck
@@ -39,7 +37,4 @@ class CardsTest < MiniTest::Test
 
     assert_equal 3, deck.count
   end
-
-
-
 end
