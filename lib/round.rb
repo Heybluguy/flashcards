@@ -1,7 +1,9 @@
 require_relative "guess"
+require "pry"
 
 class Round
   attr_reader :guesses, :deck
+  attr_accessor :index
   def initialize(deck)
     @deck = deck
     @guesses = []
@@ -21,9 +23,9 @@ class Round
 
   def number_correct
     guess_feedback = @guesses.map do |guess|
-      guess.feedback
+      guess.validation
     end
-    (guess_feedback.select { |feedback| feedback == "Correct!"}).count
+    (guess_feedback.select { |feedback| feedback == true}).count
   end
 
   def percent_correct

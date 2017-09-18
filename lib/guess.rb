@@ -1,7 +1,8 @@
 require_relative "card"
+require "pry"
 
 class Guess
-  attr_reader :card, :response
+  attr_reader :card, :response, :validation
 
   def initialize(response, card)
     @response = response
@@ -19,8 +20,10 @@ class Guess
 
   def feedback
     if @validation == true
+      # puts "Correct!".center(54)
       "Correct!"
     else
+      # puts "Incorrect.".center(54)
       "Incorrect."
     end
   end
