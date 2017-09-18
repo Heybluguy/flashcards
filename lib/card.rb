@@ -6,4 +6,3 @@ class Card
     @answer = answer
   end
 end
- 
