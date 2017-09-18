@@ -32,4 +32,5 @@ class Round
     (number_correct.to_f / @guesses.count.to_f * 100.0)
     .to_i
   end
+
 end

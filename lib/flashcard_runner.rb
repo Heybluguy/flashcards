@@ -45,7 +45,7 @@ class FlashcardRunner
       get_input
       round.record_guess(user_input)
       puts "#{round.guesses.last.feedback}".center(54)
-      round.index += 1
+      # round.index += 1
       num += 1
     end
     puts "****** Game over! ******".center(54)
