@@ -5,7 +5,6 @@ require_relative "round"
 require "pry"
 
 class FlashcardRunner
-
   attr_reader :card_1, :card_2, :card_3, :card_4, :deck, :round, :user_input, :current_card
 
   def initialize
@@ -24,31 +23,36 @@ class FlashcardRunner
   end
 
   def begin_game
-    puts "Welcome! You're playing with 4 cards.
-    -------------------------------------------------"
+    puts "\n"
+    puts "Welcome! You're playing with #{deck.cards.count} cards.".center(54)
+    puts "-------------------------------------------------".center(54)
   end
 
   def which_round(num)
     @current_card = @deck.cards[num - 1]
-    puts  "This is card number #{num} out of 4."
-
+    puts  "This is card number #{num} out of #{deck.cards.count}.".center(54)
   end
 
   def card_question
-    puts "Question: #{current_card.question}"
+    puts "Question: #{current_card.question}".center(54)
   end
 
+  def game_sequence(num)
+    rounds = deck.count
+    rounds.times do
+      which_round(num)
+      card_question
+      get_input
+      round.record_guess(user_input)
+      puts "#{round.guesses.last.feedback}".center(54)
+      round.index += 1
+      num += 1
+    end
+    puts "****** Game over! ******".center(54)
+    puts "You had #{round.number_correct} correct guesses out of #{deck.cards.count} for a score of #{round.percent_correct}%.".center(54)
+  end
 end
 
-
-
-
-fcr = FlashcardRunner.new
-# binding.pry
-
-fcr.begin_game
-fcr.which_round(1)
-fcr.card_question
-fcr.get_input
-fcr.round.record_guess(fcr.user_input)
-p fcr.round.guesses.last.feedback
+flashcard_runner = FlashcardRunner.new
+flashcard_runner.begin_game
+flashcard_runner.game_sequence(1)
