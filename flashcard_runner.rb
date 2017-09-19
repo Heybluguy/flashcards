@@ -1,17 +1,14 @@
-require_relative "guess"
-require_relative "deck"
-require_relative "card"
-require_relative "round"
+require "./lib/guess"
+require "./lib/deck"
+require "./lib/card"
+require "./lib/round"
+require "./lib/card_generator"
 
 class FlashcardRunner
-  attr_reader :card_1, :card_2, :card_3, :card_4, :deck, :round, :user_input, :current_card
+  attr_reader :deck, :round, :user_input, :current_card
 
-  def initialize
-    @card_1 = Card.new("What is 5 + 5?","10")
-    @card_2 = Card.new("What is Rachel's favorite animal?","panda")
-    @card_3 = Card.new("What is Mike's middle name?","nobody knows")
-    @card_4 = Card.new("What cardboard cutout lives at Turing?","Justin Bieber")
-    @deck = Deck.new([card_1, card_2, card_3, card_4])
+  def initialize(filename)
+    @deck = Deck.new(CardGenerator.new(filename).cards)
     @round = Round.new(deck)
     @user_input = nil
     @current_card = nil
@@ -51,6 +48,8 @@ class FlashcardRunner
   end
 end
 
-flashcard_runner = FlashcardRunner.new
+puts "What file would you like to use?"
+input = gets.chomp
+flashcard_runner = FlashcardRunner.new(input)
 flashcard_runner.begin_game
 flashcard_runner.game_sequence(1)

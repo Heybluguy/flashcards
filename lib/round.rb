@@ -24,7 +24,7 @@ class Round
     guess_feedback = @guesses.map do |guess|
       guess.validation
     end
-    (guess_feedback.select { |feedback| feedback == true}).count
+      (guess_feedback.select { |feedback| feedback == true}).count
   end
 
   def percent_correct
